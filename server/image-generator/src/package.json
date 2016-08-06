@@ -1,0 +1,15 @@
+{
+  "name": "social-painting-image-generator",
+  "version": "0.2.0",
+  "author": {
+    "name": "Daniel Oltmanns"
+  },
+  "private": true,
+  "dependencies": {
+    "express": "4.13.4",
+    "canvas": "1.3.12",
+    "winston": "2.1.1",
+    "mongojs": "2.3.0",
+    "moment": "2.11.2"
+  }
+}

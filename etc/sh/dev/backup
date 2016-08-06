@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd ~/code/projects
+FOLDER=social-painting-`my_get_id`
+TARGET=~/cloud/tmp/$FOLDER
+cp -rf social-painting $TARGET
+cd $TARGET
+find . -type d -name "node_modules" -exec rm -rf {} \;
+rm -rf .git
+cd ..
+my_zip_create $FOLDER
+rm -rf $TARGET
+unison

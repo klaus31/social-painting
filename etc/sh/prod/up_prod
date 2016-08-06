@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/code/projects/social-painting
+docker-compose -f docker-compose-prod.yml up -d

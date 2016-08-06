@@ -1,0 +1,46 @@
+version: '2'
+services:
+  social-painting-client:
+    container_name: social-painting-client
+    build:
+      context: ./client/.
+      dockerfile: Dockerfile-prod
+    volumes_from:
+      - social-painting-environment
+
+  social-painting-mongo:
+    container_name: social-painting-mongo
+    image: mongo:3.2.4
+
+  social-painting-data:
+    container_name: social-painting-data
+    build:
+      context: ./server/data/.
+      dockerfile: Dockerfile
+
+  social-painting-environment:
+    container_name: social-painting-environment
+    build: ./environment/prod/.
+
+  social-painting-image-generator:
+    container_name: social-painting-image-generator
+    build:
+      context: ./server/image-generator/.
+      dockerfile: Dockerfile-prod
+    links:
+      - social-painting-mongo:social-painting-mongo
+    volumes_from:
+      - social-painting-data
+      - social-painting-environment
+
+  social-painting-websocket:
+    container_name: social-painting-websocket
+    build:
+      context: ./server/websocket/.
+      dockerfile: Dockerfile-prod
+    links:
+      - social-painting-mongo:social-painting-mongo
+    ports:
+      - "3001:3001"
+    volumes_from:
+      - social-painting-environment

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/code/projects/social-painting/etc/
+grep "☐" todo.md | sed "s@☐ @@"

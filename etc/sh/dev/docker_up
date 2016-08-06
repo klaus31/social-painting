@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd ~/code/projects/social-painting
+
+if test $# -eq 0; then
+  docker-compose -f docker-compose-dev.yml up
+else
+  for I in $*; do
+    docker-compose -f docker-compose-dev.yml up social-painting-dev-$I
+  done
+fi

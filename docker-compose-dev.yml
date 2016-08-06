@@ -1,0 +1,76 @@
+version: '2'
+services:
+
+  social-painting-dev-client:
+    container_name: social-painting-dev-client
+    build:
+      context: ./client/.
+      dockerfile: Dockerfile-dev
+    volumes:
+      - ./client/src:/src
+      - ./environment/dev:/environment
+
+  social-painting-dev-mongo:
+    container_name: social-painting-dev-mongo
+    image: mongo:3.2.4
+
+  social-painting-dev-image-generator:
+    container_name: social-painting-dev-image-generator
+    build:
+      context: ./server/image-generator/.
+      dockerfile: Dockerfile-dev
+    links:
+      - social-painting-dev-mongo:social-painting-mongo
+    volumes:
+      - ./etc/data:/data
+      - ./server/image-generator/src:/src
+      - ./environment/dev:/environment
+
+  social-painting-dev-movie-generator:
+    container_name: social-painting-dev-movie-generator
+    build:
+      context: ./server/movie-generator/.
+      dockerfile: Dockerfile
+    volumes:
+      - ./etc/data:/data
+      - ./environment/dev:/environment
+      - ./server/movie-generator/src:/src
+
+  social-painting-dev-websocket:
+    container_name: social-painting-dev-websocket
+    build:
+      context: ./server/websocket/.
+      dockerfile: Dockerfile-dev
+    ports:
+      - "3001:3001"
+    links:
+      - social-painting-dev-mongo:social-painting-mongo
+      - social-painting-dev-image-generator:social-painting-image-generator
+    volumes:
+      - ./etc/data:/data
+      - ./server/websocket/src:/src
+      - ./environment/dev:/environment
+
+  social-painting-dev-git: # TODO kann hier raus, sobald es auf einem prod-server liegt
+    container_name: social-painting-dev-git
+    build: ./etc/docker-images/git-server/.
+    ports:
+      - "3002:22"
+    environment:
+      PROJECT_NAME: social-painting
+      PASSWORD: geheim
+
+  social-painting-dev-proxy:
+    container_name: social-painting-dev-proxy
+    build:
+      context: ./etc/docker-images/http-proxy/dev/.
+      dockerfile: Dockerfile-dev
+    ports:
+      - "80:80"
+    links:
+      - social-painting-dev-client:social-painting-client
+      - social-painting-dev-websocket:social-painting-websocket
+      - social-painting-dev-image-generator:social-painting-image-generator
+    volumes:
+      - ./etc/docker-images/http-proxy/dev/src:/src
+      - ./environment/dev:/environment

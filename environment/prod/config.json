@@ -1,0 +1,27 @@
+{
+  "pic": {
+    "folder": "/data/pics/",
+    "width": 3840,
+    "height": 2160,
+    "bgColor": "white",
+    "createEveryDrawing": 500
+  },
+  "server": {
+    "imageGenerator": {
+      "uriStarterkit": "http://localhost:3004/starterkit.json"
+    },
+    "websocket": {
+      "uri": "ws://localhost:3003"
+    }
+  },
+  "mongo": {
+    "connection": "social-painting-mongo/db"
+  },
+  "logger": {
+    "level": "info",
+    "files": {
+      "main": "/data/logs/main.log",
+      "error": "/data/logs/error.log"
+    }
+  }
+}

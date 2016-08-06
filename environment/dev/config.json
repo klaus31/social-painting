@@ -1,0 +1,38 @@
+{
+  "pic": {
+    "folder": "/data/pics/",
+    "width": 3840,
+    "height": 2160,
+    "bgColor": "white",
+    "createEveryDrawing": 20
+  },
+  "server": {
+    "imageGenerator": {
+      "uriBase": "http://images.localhost/",
+      "uriStarterkit": "http://images.localhost/starterkit.json"
+    },
+    "websocket": {
+      "uri": "ws://localhost:3001"
+    },
+    "proxy": {
+      "routing": {
+        "images.localhost": {
+          "target": "http://social-painting-image-generator"
+        },
+        "app.localhost": {
+          "target": "http://social-painting-client"
+        }
+      }
+    }
+  },
+  "mongo": {
+    "connection": "social-painting-mongo/db"
+  },
+  "logger": {
+    "level": "info",
+    "files": {
+      "main": "/data/logs/main.log",
+      "error": "/data/logs/error.log"
+    }
+  }
+}

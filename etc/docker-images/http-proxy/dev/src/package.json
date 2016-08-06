@@ -1,0 +1,11 @@
+{
+  "name": "social-painting-image-generator",
+  "version": "0.2.0",
+  "author": {
+    "name": "Daniel Oltmanns"
+  },
+  "private": true,
+  "dependencies": {
+    "http-proxy": "1.13.2"
+  }
+}

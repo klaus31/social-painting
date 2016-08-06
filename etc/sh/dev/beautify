@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd ~/code/projects/social-painting
+find . -maxdepth 4 -type f -name "*js" -exec js-beautify -r -s 2 -f {} \;
+find etc/docker-images/http-proxy/. -maxdepth 3 -type f -name "*js" -exec js-beautify -r -s 2 -f {} \;
+find . -maxdepth 4 -type f -name "*json" -exec js-beautify -r -s 2 --type js -f {} \;
+find . -maxdepth 4 -type f -name "*html" -exec js-beautify -r -s 2 --type html -f {} \;
+find . -maxdepth 4 -type f -name "*css" -exec js-beautify -r -s 2 --type css -f {} \;

@@ -1,0 +1,12 @@
+{
+  "name": "i-ll-paint-you-client",
+  "version": "0.2.0",
+  "author": {
+    "name": "Daniel Oltmanns"
+  },
+  "private": true,
+  "dependencies": {
+    "handlebars": "4.0.5",
+    "express": "4.13.4"
+  }
+}
